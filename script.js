@@ -5,8 +5,7 @@ document.getElementById("btnCalc").addEventListener("click", function () {
 
   if (!price || !rate || !years) return;
 
-  const loanAmount = price * 1.1; // 110%
-  const lawyerFee = price * 0.06;
+  const loanAmount = price * 1.1; // Always 110% of house price
   const monthlyRate = rate / 100 / 12;
   const totalMonths = years * 12;
 
@@ -14,11 +13,8 @@ document.getElementById("btnCalc").addEventListener("click", function () {
     (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -totalMonths));
 
   document.getElementById("loanAmt").textContent =
-    "RM " + loanAmount.toFixed(2).toLocaleString();
-  document.getElementById("lawyerFee").textContent =
-    "RM " + lawyerFee.toFixed(2).toLocaleString();
-  document.getElementById("rateVal").textContent = rate.toFixed(2);
-  document.getElementById("tenureVal").textContent = years;
+    "RM " + loanAmount.toLocaleString(undefined, { maximumFractionDigits: 0 });
+
   document.getElementById("monthly").textContent =
     "RM " + monthlyRepayment.toFixed(2).toLocaleString();
 
