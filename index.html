@@ -2,23 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home Loan Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home Loan Calculator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Home Loan Calculator</h1>
+  <main class="card">
+    <h1>Home Loan Calculator</h1>
 
-  <input type="number" id="housePrice" placeholder="Enter House Price (RM)" value="500000" />
-  <input type="number" id="interestRate" placeholder="Interest Rate (% per year)" value="4.5" step="0.01" />
-  <input type="number" id="loanTenure" placeholder="Loan Tenure (Years)" value="35" />
+    <label>House Price (RM)
+      <input type="number" id="price" placeholder="500000" />
+    </label>
 
-  <div class="output">
-    <span id="loanAmount">Loan Amount: -</span>
-    <span id="monthlyRepayment">Monthly Repayment: -</span>
-  </div>
+    <label>Interest Rate (% per year)
+      <input type="number" id="rate" step="0.01" placeholder="4.10" />
+    </label>
+
+    <label>Tenure (years)
+      <input type="number" id="years" placeholder="30" />
+    </label>
+
+    <label class="chk">
+      <input type="checkbox" id="firstHome" /> 1st Home Buyer (MOT waived)
+    </label>
+
+    <label class="chk">
+      <input type="checkbox" id="fullLoan" /> Full Loan (include legal fees)
+    </label>
+
+    <button id="btnCalc">Calculate</button>
+
+    <section id="result" hidden>
+      <h2>Results</h2>
+      <table>
+        <tbody>
+          <tr><th>Loan Amount</th><td id="loanAmt"></td></tr>
+          <tr><th>Monthly Repayment</th><td id="monthly"></td></tr>
+          <tr><th>SPA Legal Fee</th><td id="spaFee"></td></tr>
+          <tr><th>MOT / Stamp Duty</th><td id="motFee"></td></tr>
+          <tr><th>Loan Legal Fee</th><td id="loanFee"></td></tr>
+          <tr class="total"><th>Total Cash Needed</th><td id="totalCash"></td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 
