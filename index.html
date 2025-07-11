@@ -2,51 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home Loan Calculator</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home Loan Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    label {
+      font-size: 16px;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input {
+      font-size: 18px;
+      padding: 10px;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+    .result {
+      margin-top: 30px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    .container {
+      width: 100%;
+      max-width: 500px;
+    }
+  </style>
 </head>
 <body>
-  <main class="card">
-    <h1>Home Loan Calculator</h1>
+  <h1>Home Loan Calculator</h1>
+  <div class="container">
+    <label for="housePrice">House Price (RM):</label>
+    <input type="number" id="housePrice" placeholder="e.g. 500000" />
 
-    <label>House Price (RM)
-      <input type="number" id="price" placeholder="500000" />
-    </label>
+    <label for="interestRate">Interest Rate (% per year):</label>
+    <input type="number" id="interestRate" placeholder="e.g. 4" step="0.01" />
 
-    <label>Interest Rate (% per year)
-      <input type="number" id="rate" step="0.01" placeholder="4.10" />
-    </label>
+    <label for="tenure">Loan Tenure (Years):</label>
+    <input type="number" id="tenure" placeholder="e.g. 35" />
 
-    <label>Tenure (years)
-      <input type="number" id="years" placeholder="30" />
-    </label>
+    <div class="result" id="loanAmount">Loan Amount: RM 0</div>
+    <div class="result" id="monthlyRepayment">Monthly Repayment: RM 0</div>
+  </div>
 
-    <label class="chk">
-      <input type="checkbox" id="firstHome" /> 1st Home Buyer (MOT waived)
-    </label>
+  <script>
+    const housePriceInput = document.getElementById("housePrice");
+    const interestRateInput = document.getElementById("interestRate");
+    const tenureInput = document.getElementById("tenure");
+    const loanAmountDisplay = document.getElementById("loanAmount");
+    const monthlyRepaymentDisplay = document.getElementById("monthlyRepayment");
 
-    <label class="chk">
-      <input type="checkbox" id="fullLoan" /> Full Loan (include legal fees)
-    </label>
+    function calculateLoan() {
+      const housePrice = parseFloat(housePriceInput.value);
+      const interestRate = parseFloat(interestRateInput.value) / 100;
+      const tenureYears = parseFloat(tenureInput.value);
+      const months = tenureYears * 12;
 
-    <button id="btnCalc">Calculate</button>
+      if (!housePrice || !interestRate || !tenureYears) {
+        loanAmountDisplay.textContent = "Loan Amount: RM 0";
+        monthlyRepaymentDisplay.textContent = "Monthly Repayment: RM 0";
+        return;
+      }
 
-    <section id="result" hidden>
-      <h2>Results</h2>
-      <table>
-        <tbody>
-          <tr><th>Loan Amount</th><td id="loanAmt"></td></tr>
-          <tr><th>Monthly Repayment</th><td id="monthly"></td></tr>
-          <tr><th>SPA Legal Fee</th><td id="spaFee"></td></tr>
-          <tr><th>MOT / Stamp Duty</th><td id="motFee"></td></tr>
-          <tr><th>Loan Legal Fee</th><td id="loanFee"></td></tr>
-          <tr class="total"><th>Total Cash Needed</th><td id="totalCash"></td></tr>
-        </tbody>
-      </table>
-    </section>
-  </main>
+      const loanAmount = housePrice * 1.10; // Full loan = 110% of house price
+      const monthlyInterest = interestRate / 12;
 
-  <script src="script.js"></script>
+      const monthlyRepayment = (loanAmount * monthlyInterest) / 
+        (1 - Math.pow(1 + monthlyInterest, -months));
+
+      loanAmountDisplay.textContent = "Loan Amount: RM " + loanAmount.toLocaleString("en-MY", { maximumFractionDigits: 0 });
+      monthlyRepaymentDisplay.textContent = "Monthly Repayment: RM " + monthlyRepayment.toLocaleString("en-MY", { maximumFractionDigits: 2 });
+    }
+
+    housePriceInput.addEventListener("input", calculateLoan);
+    interestRateInput.addEventListener("input", calculateLoan);
+    tenureInput.addEventListener("input", calculateLoan);
+  </script>
 </body>
 </html>
