@@ -3,31 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home Loan Calculator</title>
+  <title>Home Loan Calculator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="card">
-    <h1>Home Loan Calculator</h1>
+    <h1>Home Loan Calculator</h1>
 
-    <label>House Price (RM)
+    <label>House Price (RM)
       <input type="number" id="price" placeholder="500000" />
     </label>
 
-    <label>Interest Rate (% per year)
+    <label>Interest Rate (% per year)
       <input type="number" id="rate" step="0.01" placeholder="4.10" />
     </label>
 
-    <label>Tenure (years)
+    <label>Tenure (years)
       <input type="number" id="years" placeholder="30" />
-    </label>
-
-    <label class="chk">
-      <input type="checkbox" id="firstHome" /> 1st Home Buyer (MOT waived)
-    </label>
-
-    <label class="chk">
-      <input type="checkbox" id="fullLoan" /> Full Loan (include legal fees)
     </label>
 
     <button id="btnCalc">Calculate</button>
@@ -38,10 +30,6 @@
         <tbody>
           <tr><th>Loan Amount</th><td id="loanAmt"></td></tr>
           <tr><th>Monthly Repayment</th><td id="monthly"></td></tr>
-          <tr><th>SPA Legal Fee</th><td id="spaFee"></td></tr>
-          <tr><th>MOT / Stamp Duty</th><td id="motFee"></td></tr>
-          <tr><th>Loan Legal Fee</th><td id="loanFee"></td></tr>
-          <tr class="total"><th>Total Cash Needed</th><td id="totalCash"></td></tr>
         </tbody>
       </table>
     </section>
@@ -50,5 +38,6 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
