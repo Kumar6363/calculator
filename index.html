@@ -4,50 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home Loan Calculator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 30px 20px;
-      background-color: #f3f3f3;
-      text-align: center;
-    }
-
-    h1 {
-      color: #222;
-      font-size: 1.8em;
-    }
-
-    input {
-      width: 100%;
-      max-width: 300px;
-      padding: 10px;
-      margin: 10px auto;
-      font-size: 16px;
-      display: block;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .output {
-      margin-top: 30px;
-      font-size: 1.4em;
-      color: #2b3d52;
-      font-weight: bold;
-    }
-
-    .output span {
-      display: block;
-      margin-top: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>Home Loan Calculator</h1>
 
   <input type="number" id="housePrice" placeholder="Enter House Price (RM)" value="500000" />
-
   <input type="number" id="interestRate" placeholder="Interest Rate (% per year)" value="4.5" step="0.01" />
-
   <input type="number" id="loanTenure" placeholder="Loan Tenure (Years)" value="35" />
 
   <div class="output">
@@ -55,34 +18,7 @@
     <span id="monthlyRepayment">Monthly Repayment: -</span>
   </div>
 
-  <script>
-    const housePriceInput = document.getElementById("housePrice");
-    const interestRateInput = document.getElementById("interestRate");
-    const loanTenureInput = document.getElementById("loanTenure");
-
-    const loanAmountDisplay = document.getElementById("loanAmount");
-    const monthlyRepaymentDisplay = document.getElementById("monthlyRepayment");
-
-    function calculate() {
-      const housePrice = parseFloat(housePriceInput.value) || 0;
-      const interestRate = parseFloat(interestRateInput.value) || 0;
-      const years = parseFloat(loanTenureInput.value) || 0;
-
-      const loanAmount = housePrice * 1.1; // Full loan = 110%
-      const monthlyInterest = interestRate / 100 / 12;
-      const totalMonths = years * 12;
-
-      const monthlyRepayment = loanAmount * monthlyInterest / (1 - Math.pow(1 + monthlyInterest, -totalMonths));
-
-      loanAmountDisplay.textContent = `Loan Amount: RM ${loanAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
-      monthlyRepaymentDisplay.textContent = `Monthly Repayment: RM ${monthlyRepayment.toFixed(2).toLocaleString()}`;
-    }
-
-    housePriceInput.addEventListener("input", calculate);
-    interestRateInput.addEventListener("input", calculate);
-    loanTenureInput.addEventListener("input", calculate);
-
-    window.onload = calculate;
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
+
