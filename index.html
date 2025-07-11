@@ -15,29 +15,34 @@
     </label>
 
     <label>Interest Rate (% per year)
-      <input type="number" id="rate" step="0.01" placeholder="4.10" />
+      <input type="number" id="rate" step="0.01" placeholder="4.25" />
     </label>
 
     <label>Tenure (years)
-      <input type="number" id="years" placeholder="30" />
+      <input type="number" id="years" placeholder="35" />
     </label>
 
     <button id="btnCalc">Calculate</button>
 
     <section id="result" hidden>
-      <h2>Results</h2>
-      <table>
-        <tbody>
-          <tr><th>Loan Amount</th><td id="loanAmt"></td></tr>
-          <tr><th>Monthly Repayment</th><td id="monthly"></td></tr>
-        </tbody>
-      </table>
+      <div class="result-box">
+        <p><strong>Loan Amount:</strong> <span id="loanAmt"></span></p>
+        <p><strong>Lawyer Fee:</strong> <span id="lawyerFee"></span></p>
+        <p class="mini-note">
+          Interest Rate: <span id="rateVal"></span>% ||
+          Loan Tenure: <span id="tenureVal"></span> years
+        </p>
+        <p class="monthly">
+          Monthly Repayment:<br />
+          <span id="monthly"></span>
+        </p>
+        <p class="note">
+          * Estimates only. Actual costs may vary depending on the bank, legal firm, and property condition.
+        </p>
+      </div>
     </section>
   </main>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
