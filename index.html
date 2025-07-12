@@ -2,102 +2,186 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home Loan Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EzySales Agent Tool</title>
+
+  <!-- ----------  BASIC STYLES  ---------- -->
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f1f3f6;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',sans-serif;background:#f2f5f8;padding:20px}
+
+    /* HEADER + NAV */
+    h1{text-align:center;margin:0 0 25px;font-size:2rem;color:#111}
+    .tabs{display:flex;justify-content:center;flex-wrap:wrap;margin-bottom:25px}
+    .tablink{
+      background:#fff;border:1px solid #ccc;padding:10px 22px;
+      cursor:pointer;margin:5px;font-weight:600;border-radius:6px
     }
-    .container {
-      max-width: 400px;
-      margin: 50px auto;
-      background: white;
-      padding: 30px 20px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      text-align: center;
+    .tablink.active{background:#0d6efd;color:#fff;border-color:#0d6efd}
+
+    /* CONTENT CARDS */
+    .card{
+      background:#fff;max-width:500px;width:100%;margin:0 auto;
+      padding:24px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.08)
     }
-    h1 {
-      margin-bottom: 25px;
-      font-size: 24px;
+    .tab-content{display:none}
+    .tab-content.active{display:block}
+
+    h2{margin-bottom:15px;font-size:1.4rem;font-weight:600;color:#222}
+    label{display:block;margin:12px 0 5px;font-weight:500}
+    input[type=number]{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px}
+
+    button.calc{
+      width:100%;padding:12px;margin-top:18px;border:none;border-radius:8px;
+      background:#0d6efd;color:#fff;font-size:1rem;font-weight:600;cursor:pointer
     }
-    label {
-      display: block;
-      text-align: left;
-      margin: 15px 0 5px;
-      font-weight: 500;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-    button {
-      width: 100%;
-      margin-top: 20px;
-      padding: 12px;
-      background: #2563eb;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .result {
-      margin-top: 30px;
-    }
-    .result h2 {
-      margin-bottom: 10px;
-      font-size: 20px;
-    }
-    .monthly {
-      font-size: 28px;
-      font-weight: bold;
-      color: green;
-    }
+    button.calc:hover{background:#0b5ed7}
+
+    /* RESULT BOXES */
+    .result{margin-top:20px;font-weight:700;text-align:center;color:#198754}
+    #ndiResult hr{margin:10px 0;border:0;border-top:1px dashed #ccc}
+    .result.red{color:#dc3545}
+
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Home Loan Calculator</h1>
+  <h1>EzySales Agent Tool</h1>
 
-    <label>House Price (RM)</label>
-    <input type="number" id="price" placeholder="500000" />
+  <!-- ----------  NAV TABS  ---------- -->
+  <div class="tabs">
+    <button class="tablink active" onclick="openTab(event,'about')">About</button>
+    <button class="tablink" onclick="openTab(event,'loan')">Home Loan</button>
+    <button class="tablink" onclick="openTab(event,'dsr')">DSR</button>
+    <button class="tablink" onclick="openTab(event,'ndi')">NDI</button>
+  </div>
 
-    <label>Interest Rate (% per year)</label>
-    <input type="number" id="rate" step="0.01" placeholder="4.25" />
-
-    <label>Tenure (years)</label>
-    <input type="number" id="years" placeholder="35" />
-
-    <button onclick="calculate()">Calculate</button>
-
-    <div class="result" id="result" style="display: none;">
-      <h2>Monthly Repayment</h2>
-      <div class="monthly">RM <span id="monthlyRepay"></span></div>
+  <!-- ----------  ABOUT TAB  ---------- -->
+  <div id="about" class="tab-content active">
+    <div class="card">
+      <h2>About EzySales</h2>
+      <p>One‑page toolkit for Malaysian property agents: quick calculators for
+      loan repayment, DSR, and NDI. Streamline your consultation and close deals faster!</p>
+      <p style="margin-top:10px"><strong>Mission:</strong> Empower agents with transparent numbers.</p>
     </div>
   </div>
 
+  <!-- ----------  HOME‑LOAN TAB  ---------- -->
+  <div id="loan" class="tab-content">
+    <div class="card">
+      <h2>🏡 Home Loan Calculator</h2>
+      <label>Loan Amount (RM)</label>
+      <input type="number" id="loanAmount" value="500000" />
+
+      <label>Interest Rate (%)</label>
+      <input type="number" id="interestRate" value="4.25" step="0.01"/>
+
+      <label>Tenure (years)</label>
+      <input type="number" id="loanTenure" value="35"/>
+
+      <button class="calc" onclick="calcLoan()">Calculate</button>
+      <div id="loanResult" class="result"></div>
+    </div>
+  </div>
+
+  <!-- ----------  DSR TAB  ---------- -->
+  <div id="dsr" class="tab-content">
+    <div class="card">
+      <h2>📊 DSR Calculator</h2>
+      <label>Gross Income (RM)</label>
+      <input type="number" id="dsrIncome" value="5000"/>
+
+      <label>Total Commitments (RM)</label>
+      <input type="number" id="dsrCommit" value="1000"/>
+
+      <label>DSR Limit (%)</label>
+      <input type="number" id="dsrLimit" value="65"/>
+
+      <button class="calc" onclick="calcDSR()">Check Eligibility</button>
+      <div id="dsrResult" class="result"></div>
+    </div>
+  </div>
+
+  <!-- ----------  NDI TAB  ---------- -->
+  <div id="ndi" class="tab-content">
+    <div class="card">
+      <h2>💰 NDI (Net Disposable Income) Checker</h2>
+
+      <label>Monthly Gross Income (RM)</label>
+      <input type="number" id="ndiGross" value="5000"/>
+
+      <label>EPF Deduction (%)</label>
+      <input type="number" id="ndiEPF" value="12"/>
+
+      <label>SOCSO / Tax (RM)</label>
+      <input type="number" id="ndiTax" value="200"/>
+
+      <label>Total Loan Commitments (RM)</label>
+      <input type="number" id="ndiLoans" value="1500"/>
+
+      <label>Living Expenses (RM)</label>
+      <input type="number" id="ndiLive" value="200"/>
+
+      <button class="calc" onclick="calcNDI()">Calculate NDI</button>
+      <div id="ndiResult" class="result" hidden></div>
+    </div>
+  </div>
+
+  <!-- ----------  JAVASCRIPT  ---------- -->
   <script>
-    function calculate() {
-      const price = parseFloat(document.getElementById("price").value);
-      const rate = parseFloat(document.getElementById("rate").value);
-      const years = parseInt(document.getElementById("years").value);
+    /* --- TAB HANDLER --- */
+    function openTab(evt,id){
+      document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.tablink').forEach(b=>b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
 
-      if (!price || !rate || !years) return;
+    /* --- LOAN CALC --- */
+    function calcLoan(){
+      const P = +loanAmount.value||0;
+      const r = (+interestRate.value||0)/100/12;
+      const n = (+loanTenure.value||0)*12;
+      if(!P||!r||!n){loanResult.textContent='';return;}
+      const M = P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+      loanResult.textContent = 'Monthly Repayment: RM '+M.toFixed(2);
+    }
 
-      const loanAmount = price;
-      const monthlyRate = rate / 100 / 12;
-      const months = years * 12;
+    /* --- DSR CALC --- */
+    function calcDSR(){
+      const inc = +dsrIncome.value||0;
+      const com = +dsrCommit.value||0;
+      const lim = (+dsrLimit.value||0)/100;
+      if(!inc){dsrResult.textContent='';return;}
+      const maxPay = inc*lim - com;
+      const estLoan = maxPay*200;
+      dsrResult.innerHTML =
+        `Max Monthly Installment:<br><span style=\"font-size:1.4rem\">RM ${maxPay.toFixed(2)}</span><br><br>`+
+        `Est. Loan:<br><span style=\"font-size:1.4rem\">RM ${estLoan.toFixed(2)}</span>`;
+    }
 
-      const monthlyRepay = (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
-      document.getElementById("monthlyRepay").innerText = monthlyRepay.toFixed(2);
-      document.getElementById("result").style.display = "block";
+    /* --- NDI CALC WITH BREAKDOWN --- */
+    function calcNDI(){
+      const g = +ndiGross.value||0;
+      const epfPct = +ndiEPF.value||0;
+      const tax = +ndiTax.value||0;
+      const loans = +ndiLoans.value||0;
+      const live = +ndiLive.value||0;
+      if(!g){ndiResult.hidden=true;return;}
+
+      const epf = g*epfPct/100;
+      const ndi = g - epf - tax - loans - live;
+
+      ndiResult.innerHTML =
+        `<div style=\"text-align:left\">\n`+
+        `Monthly Gross Income: RM ${g.toFixed(2)}<br>`+
+        `- EPF (${epfPct}%): RM ${epf.toFixed(2)}<br>`+
+        `- SOCSO / Tax: RM ${tax.toFixed(2)}<br>`+
+        `- Loan Commitments: RM ${loans.toFixed(2)}<br>`+
+        `- Living Expenses: RM ${live.toFixed(2)}<br><hr></div>`+
+        `<span style=\"font-size:1.2rem\">Net Disposable Income (NDI): RM ${ndi.toFixed(2)}</span><br><br>`+
+        (ndi>1000?'<span style=\"color:#198754\">✅ NDI is healthy</span>':'<span style=\"color:#dc3545\">❌ NDI may be too low</span>');
+      ndiResult.hidden=false;
     }
   </script>
 </body>
