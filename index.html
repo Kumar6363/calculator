@@ -1,61 +1,77 @@
-// Replace this portion in your HTML (inside the NDI tab panel)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EzySales Agent Tool</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>EzySales Agent Tool</h1>
+    <div class="tabs">
+      <button class="tab-button active" onclick="openTab('about')">About</button>
+      <button class="tab-button" onclick="openTab('homeLoan')">Home Loan</button>
+      <button class="tab-button" onclick="openTab('dsr')">DSR</button>
+      <button class="tab-button" onclick="openTab('ndi')">NDI</button>
+    </div>
 
-<div id="ndi" class="tab-panel">
-  <div class="card">
-    <h2>🧾 NDI (Net Disposable Income) Checker</h2>
-    <div class="input-group">
+    <!-- ABOUT TAB -->
+    <div class="tab-panel active" id="about">
+      <h2>Welcome to EzySales</h2>
+      <p>This tool is designed to help agents calculate:</p>
+      <ul>
+        <li>🏡 Home Loan Repayments</li>
+        <li>📊 DSR Eligibility</li>
+        <li>🧾 Net Disposable Income</li>
+      </ul>
+      <p>Let's close more deals together!</p>
+    </div>
+
+    <!-- HOME LOAN TAB -->
+    <div class="tab-panel" id="homeLoan">
+      <h2>🏡 Home Loan Calculator</h2>
+      <label>Loan Amount (RM)</label>
+      <input type="number" id="loanAmount" value="500000" />
+      <label>Interest Rate (%)</label>
+      <input type="number" id="interestRate" value="4.25" />
+      <label>Tenure (years)</label>
+      <input type="number" id="loanTenure" value="35" />
+      <button onclick="calculateLoan()">Calculate</button>
+      <div id="loanResult" class="result"></div>
+    </div>
+
+    <!-- DSR TAB -->
+    <div class="tab-panel" id="dsr">
+      <h2>📊 DSR Calculator</h2>
+      <label>Gross Income (RM)</label>
+      <input type="number" id="dsrIncome" value="5000" />
+      <label>Total Commitments (RM)</label>
+      <input type="number" id="dsrCommitment" value="1000" />
+      <label>DSR Limit (%)</label>
+      <input type="number" id="dsrLimit" value="65" />
+      <button onclick="calculateDSR()">Check Eligibility</button>
+      <div id="dsrResult" class="result"></div>
+    </div>
+
+    <!-- NDI TAB -->
+    <div class="tab-panel" id="ndi">
+      <h2>🧾 NDI (Net Disposable Income) Checker</h2>
       <label>Monthly Gross Income (RM)</label>
-      <input type="number" id="ndiGross" value="5000">
-    </div>
-    <div class="input-group">
+      <input type="number" id="grossIncome" value="5000" />
       <label>EPF Deduction (%)</label>
-      <input type="number" id="ndiEPF" value="12">
-    </div>
-    <div class="input-group">
+      <input type="number" id="epf" value="11" />
       <label>SOCSO / Tax (RM)</label>
-      <input type="number" id="ndiTax" value="200">
-    </div>
-    <div class="input-group">
+      <input type="number" id="tax" value="200" />
       <label>Total Loan Commitments (RM)</label>
-      <input type="number" id="ndiLoans" value="1500">
-    </div>
-    <div class="input-group">
+      <input type="number" id="loanCommitments" value="1500" />
       <label>Living Expenses (RM)</label>
-      <input type="number" id="ndiLiving" value="200">
+      <input type="number" id="livingExpenses" value="500" />
+      <button onclick="calculateNDI()">Calculate NDI</button>
+      <div id="ndiResult" class="result"></div>
     </div>
-    <button onclick="calculateNDI()">Calculate NDI</button>
-    <div id="ndiResult" class="result-card" hidden></div>
   </div>
-</div>
 
-// Replace or add this function in your <script> section
-
-function calculateNDI() {
-  const gross = parseFloat(document.getElementById('ndiGross').value);
-  const epfRate = parseFloat(document.getElementById('ndiEPF').value);
-  const tax = parseFloat(document.getElementById('ndiTax').value);
-  const loans = parseFloat(document.getElementById('ndiLoans').value);
-  const living = parseFloat(document.getElementById('ndiLiving').value);
-
-  if (isNaN(gross) || isNaN(epfRate) || isNaN(tax) || isNaN(loans) || isNaN(living)) return;
-
-  const epf = gross * (epfRate / 100);
-  const netIncome = gross - epf - tax - loans - living;
-
-  let result = `
-    <h3>Breakdown</h3>
-    <p>Monthly Gross Income: RM ${gross.toFixed(2)}</p>
-    <p>- EPF (${epfRate}%): RM ${epf.toFixed(2)}</p>
-    <p>- SOCSO / Tax: RM ${tax.toFixed(2)}</p>
-    <p>- Loan Commitments: RM ${loans.toFixed(2)}</p>
-    <p>- Living Expenses: RM ${living.toFixed(2)}</p>
-    <hr>
-    <strong style="font-size:1.2rem; color:#28a745;">Net Disposable Income (NDI): RM ${netIncome.toFixed(2)}</strong>
-    <br><br>
-    ${netIncome > 1000 ? '<p style="color:green">✅ Your NDI is healthy for new loan applications.</p>' : '<p style="color:red">❌ Your NDI may be too low for most loans.</p>'}
-  `;
-
-  const resultBox = document.getElementById('ndiResult');
-  resultBox.innerHTML = result;
-  resultBox.hidden = false;
-}
+  <script src="script.js"></script>
+</body>
+</html>
