@@ -5,84 +5,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>EzySales Agent Tool</title>
   <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="wrapper">
-    <!-- Sidebar Tabs -->
-    <div class="sidebar">
-      <button class="tab-button active" onclick="showTab('about', event)">ℹ️ About</button>
-      <button class="tab-button" onclick="showTab('homeLoan', event)">🏠 Home Loan</button>
-      <button class="tab-button" onclick="showTab('dsr', event)">📊 DSR</button>
-      <button class="tab-button" onclick="showTab('ndi', event)">💰 NDI</button>
+  <div class="container">
+    <h1 class="title">EzySales Agent Tool</h1>
+
+    <div class="tabs">
+      <button class="tab-button active" onclick="showTab('about')">About</button>
+      <button class="tab-button" onclick="showTab('loan')">Home Loan</button>
+      <button class="tab-button" onclick="showTab('dsr')">DSR</button>
+      <button class="tab-button" onclick="showTab('ndi')">NDI</button>
     </div>
 
-    <!-- Main Content -->
-    <div class="content">
-      <div class="title-box">
-        <div class="title-box">🗝️ EzySales Agent Tool</div>
+    <div id="about" class="tab-content">
+      <h2>About</h2>
+      <p>All-in-one calculators for Malaysian property agents.</p>
+    </div>
 
-      </div>
+    <div id="loan" class="tab-content hidden">
+      <h2>🏡 Home Loan Calculator</h2>
+      <label>Loan Amount (RM)</label>
+      <input type="number" id="loanAmount" value="500000" />
 
-      <div class="content-box">
-        <!-- About -->
-        <div id="about" class="tab-content">
-          <h2>ℹ️ About</h2>
-          <p>All-in-one calculators for Malaysian property agents.</p>
-        </div>
+      <label>Interest Rate (%)</label>
+      <input type="number" id="interestRate" value="4.25" step="0.01"/>
 
-        <!-- Home Loan -->
-        <div id="homeLoan" class="tab-content hidden">
-          <h2>🏠 Home Loan Calculator</h2>
-          <label>Loan Amount (RM)</label>
-          <input type="number" id="loanAmount" value="500000" />
-          <label>Interest Rate (%)</label>
-          <input type="number" id="interestRate" value="4.25" />
-          <label>Tenure (years)</label>
-          <input type="number" id="loanTenure" value="35" />
-          <button onclick="calculateLoan()">Calculate</button>
-          <div id="loanResult" class="result hidden">
-            <span id="monthlyPayment" class="highlight"></span>
-          </div>
-        </div>
+      <label>Tenure (years)</label>
+      <input type="number" id="loanTenure" value="35" />
 
-        <!-- DSR -->
-        <div id="dsr" class="tab-content hidden">
-          <h2>📊 DSR Calculator</h2>
-          <label>Gross Income (RM)</label>
-          <input type="number" id="grossIncome" />
-          <label>Total Commitments (RM)</label>
-          <input type="number" id="commitments" />
-          <label>DSR Limit (%)</label>
-          <input type="number" id="dsrLimit" value="65" />
-          <button onclick="calculateDSR()">Check Eligibility</button>
-          <div id="dsrResult" class="result hidden">
-            <div id="maxInstallment"></div>
-            <div id="estLoan"></div>
-            <div id="dsrComment"></div>
-          </div>
-        </div>
+      <button onclick="calculateLoan()">Calculate</button>
+      <div id="loanResult" class="result"></div>
+    </div>
 
-        <!-- NDI -->
-        <div id="ndi" class="tab-content hidden">
-          <h2>💰 NDI Checker</h2>
-          <label>Gross Income (RM)</label>
-          <input type="number" id="ndiGross" />
-          <label>EPF Deduction (%)</label>
-          <input type="number" id="epf" value="11" />
-          <label>SOCSO / Tax (RM)</label>
-          <input type="number" id="socso" />
-          <label>Loan Commitments (RM)</label>
-          <input type="number" id="ndiLoan" />
-          <label>Living Expenses (RM)</label>
-          <input type="number" id="living" />
-          <button onclick="calculateNDI()">Calculate NDI</button>
-          <div id="ndiResult" class="result hidden">
-            <div id="ndiValue"></div>
-          </div>
-        </div>
-      </div><!-- /content-box -->
-    </div><!-- /content -->
-  </div><!-- /wrapper -->
+    <div id="dsr" class="tab-content hidden">
+      <h2>📊 DSR Calculator</h2>
+      <label>Gross Income (RM)</label>
+      <input type="number" id="grossIncome" />
+
+      <label>Total Commitments (RM)</label>
+      <input type="number" id="commitments" />
+
+      <label>DSR Limit (%)</label>
+      <input type="number" id="dsrLimit" value="65" />
+
+      <button onclick="calculateDSR()">Check Eligibility</button>
+      <div id="dsrResult" class="result"></div>
+    </div>
+
+    <div id="ndi" class="tab-content hidden">
+      <h2>📑 NDI Checker</h2>
+      <label>Gross Income (RM)</label>
+      <input type="number" id="ndiGross" />
+
+      <label>EPF Deduction (%)</label>
+      <input type="number" id="epf" value="11" />
+
+      <label>SOCSO / Tax (RM)</label>
+      <input type="number" id="socso" />
+
+      <label>Loan Commitments (RM)</label>
+      <input type="number" id="ndiLoan" />
+
+      <label>Living Expenses (RM)</label>
+      <input type="number" id="living" />
+
+      <button onclick="calculateNDI()">Calculate NDI</button>
+      <div id="ndiResult" class="result"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
