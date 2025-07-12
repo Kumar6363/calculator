@@ -2,35 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>EzySales Agent Tool</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
   <div class="wrapper">
-    <!-- ── Sidebar Tabs ───────────────────────────── -->
+    <!-- Sidebar Tabs -->
     <div class="sidebar">
       <button class="tab-button active" onclick="showTab('about', event)">ℹ️ About</button>
-      <button class="tab-button" onclick="showTab('homeLoan', event)">🏠 Home&nbsp;Loan</button>
+      <button class="tab-button" onclick="showTab('homeLoan', event)">🏠 Home Loan</button>
       <button class="tab-button" onclick="showTab('dsr', event)">📊 DSR</button>
       <button class="tab-button" onclick="showTab('ndi', event)">💰 NDI</button>
     </div>
 
-    <!-- ── Main Content ───────────────────────────── -->
+    <!-- Main Content -->
     <div class="content">
-      <h1 class="main-title">EzySales Agent Tool</h1>
+      <div class="title-box">
+        <h1 class="main-title">EzySales Agent Tool</h1>
+      </div>
 
       <div class="content-box">
         <!-- About -->
         <div id="about" class="tab-content">
           <h2>ℹ️ About</h2>
-          <p>All‑in‑one calculators for Malaysian property agents.</p>
+          <p>All-in-one calculators for Malaysian property agents.</p>
         </div>
 
         <!-- Home Loan -->
         <div id="homeLoan" class="tab-content hidden">
-          <h2>🏠 Home Loan Calculator</h2>
+          <h2>🏠 Home Loan Calculator</h2>
           <label>Loan Amount (RM)</label>
           <input type="number" id="loanAmount" value="500000" />
           <label>Interest Rate (%)</label>
@@ -78,7 +80,7 @@
             <div id="ndiValue"></div>
           </div>
         </div>
-      </div><!-- /content‑box -->
+      </div><!-- /content-box -->
     </div><!-- /content -->
   </div><!-- /wrapper -->
 </body>
