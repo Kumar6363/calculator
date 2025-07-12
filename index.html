@@ -4,97 +4,73 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EzySales Agent Tool</title>
-
-  <!-- external files -->
   <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
 </head>
 <body>
   <div class="wrapper">
-    <h1 class="main-title">EzySales Agent Tool</h1>
-
-    <!-- TAB NAV -->
-    <div class="tabs">
-      <button class="tab-button active" onclick="showTab('about', event)">About</button>
-      <button class="tab-button" onclick="showTab('home',  event)">Home Loan</button>
-      <button class="tab-button" onclick="showTab('dsr',   event)">DSR</button>
-      <button class="tab-button" onclick="showTab('ndi',   event)">NDI</button>
+    <div class="sidebar">
+      <button class="tab-button active" onclick="showTab('about', event)">ℹ️ About</button>
+      <button class="tab-button" onclick="showTab('homeLoan', event)">🏠 Home Loan</button>
+      <button class="tab-button" onclick="showTab('dsr', event)">📊 DSR</button>
+      <button class="tab-button" onclick="showTab('ndi', event)">💰 NDI</button>
     </div>
 
-    <!-- ABOUT -->
-    <div class="tab-content" id="about">
-      <h2>🏠 Welcome to EzySales Tools</h2>
-      <p>Quick calculators for Home Loan, DSR, and NDI — perfect for Malaysian
-         property agents. Select a tab above to begin.</p>
-    </div>
+    <div class="content">
+      <h1 class="main-title">EzySales Agent Tool</h1>
 
-    <!-- HOME‑LOAN -->
-    <div class="tab-content hidden" id="home">
-      <h2>🏡 Home Loan Calculator</h2>
-
-      <label>Loan Amount (RM)</label>
-      <input type="number" id="loanAmount" value="500000">
-
-      <label>Interest Rate (%)</label>
-      <input type="number" id="interestRate" value="4.25" step="0.01">
-
-      <label>Tenure (years)</label>
-      <input type="number" id="loanTenure" value="35">
-
-      <button onclick="calculateLoan()">Calculate</button>
-
-      <div class="result-box" id="loanResult" style="display:none;">
-        <div id="monthlyPayment"></div>
+      <div id="about" class="tab-content">
+        <h2>About EzySales Team</h2>
+        <p>Welcome to EzySales Agent Tools! Our team helps agents close deals faster with better property financing insights.</p>
       </div>
-    </div>
 
-    <!-- DSR -->
-    <div class="tab-content hidden" id="dsr">
-      <h2>📊 DSR Calculator</h2>
-
-      <label>Gross Income (RM)</label>
-      <input type="number" id="grossIncome">
-
-      <label>Total Commitments (RM)</label>
-      <input type="number" id="commitments">
-
-      <label>DSR Limit (%)</label>
-      <input type="number" id="dsrLimit" value="65">
-
-      <button onclick="calculateDSR()">Check Eligibility</button>
-
-      <div class="result-box" id="dsrResult" style="display:none;">
-        <div id="maxInstallment"></div>
-        <div id="estLoan"></div>
-        <p id="dsrComment"></p>
+      <div id="homeLoan" class="tab-content hidden">
+        <h2>🏠 Home Loan Calculator</h2>
+        <label>Loan Amount (RM)</label>
+        <input type="number" id="loanAmount" value="500000" />
+        <label>Interest Rate (%)</label>
+        <input type="number" id="interestRate" value="4.25" />
+        <label>Tenure (years)</label>
+        <input type="number" id="loanTenure" value="35" />
+        <button onclick="calculateLoan()">Calculate</button>
+        <div id="loanResult" class="result-box" style="display:none"></div>
       </div>
-    </div>
 
-    <!-- NDI -->
-    <div class="tab-content hidden" id="ndi">
-      <h2>🧾 NDI Checker</h2>
+      <div id="dsr" class="tab-content hidden">
+        <h2>📊 DSR Calculator</h2>
+        <label>Gross Income (RM)</label>
+        <input type="number" id="grossIncome" />
+        <label>Total Commitments (RM)</label>
+        <input type="number" id="commitments" />
+        <label>DSR Limit (%)</label>
+        <input type="number" id="dsrLimit" value="65" />
+        <button onclick="calculateDSR()">Check Eligibility</button>
+        <div id="dsrResult" class="result-box" style="display:none">
+          <div id="maxInstallment"></div>
+          <div id="estLoan"></div>
+          <div id="dsrComment"></div>
+        </div>
+      </div>
 
-      <label>Gross Income (RM)</label>
-      <input type="number" id="ndiGross">
-
-      <label>EPF Deduction (%)</label>
-      <input type="number" id="epf" value="11">
-
-      <label>SOCSO / Tax (RM)</label>
-      <input type="number" id="socso">
-
-      <label>Loan Commitments (RM)</label>
-      <input type="number" id="ndiLoan">
-
-      <label>Living Expenses (RM)</label>
-      <input type="number" id="living">
-
-      <button onclick="calculateNDI()">Calculate NDI</button>
-
-      <div class="result-box" id="ndiResult" style="display:none;">
-        <div id="ndiValue"></div>
+      <div id="ndi" class="tab-content hidden">
+        <h2>💰 NDI Checker</h2>
+        <label>Gross Income (RM)</label>
+        <input type="number" id="ndiGross" />
+        <label>EPF Deduction (%)</label>
+        <input type="number" id="epf" value="11" />
+        <label>SOCSO / Tax (RM)</label>
+        <input type="number" id="socso" />
+        <label>Loan Commitments (RM)</label>
+        <input type="number" id="ndiLoan" />
+        <label>Living Expenses (RM)</label>
+        <input type="number" id="living" />
+        <button onclick="calculateNDI()">Calculate NDI</button>
+        <div id="ndiResult" class="result-box" style="display:none">
+          <div id="ndiValue"></div>
+        </div>
       </div>
     </div>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
