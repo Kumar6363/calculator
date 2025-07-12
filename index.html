@@ -1,188 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EzySales Agent Tool</title>
+// Replace this portion in your HTML (inside the NDI tab panel)
 
-  <!-- ----------  BASIC STYLES  ---------- -->
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Segoe UI',sans-serif;background:#f2f5f8;padding:20px}
-
-    /* HEADER + NAV */
-    h1{text-align:center;margin:0 0 25px;font-size:2rem;color:#111}
-    .tabs{display:flex;justify-content:center;flex-wrap:wrap;margin-bottom:25px}
-    .tablink{
-      background:#fff;border:1px solid #ccc;padding:10px 22px;
-      cursor:pointer;margin:5px;font-weight:600;border-radius:6px
-    }
-    .tablink.active{background:#0d6efd;color:#fff;border-color:#0d6efd}
-
-    /* CONTENT CARDS */
-    .card{
-      background:#fff;max-width:500px;width:100%;margin:0 auto;
-      padding:24px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.08)
-    }
-    .tab-content{display:none}
-    .tab-content.active{display:block}
-
-    h2{margin-bottom:15px;font-size:1.4rem;font-weight:600;color:#222}
-    label{display:block;margin:12px 0 5px;font-weight:500}
-    input[type=number]{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px}
-
-    button.calc{
-      width:100%;padding:12px;margin-top:18px;border:none;border-radius:8px;
-      background:#0d6efd;color:#fff;font-size:1rem;font-weight:600;cursor:pointer
-    }
-    button.calc:hover{background:#0b5ed7}
-
-    /* RESULT BOXES */
-    .result{margin-top:20px;font-weight:700;text-align:center;color:#198754}
-    #ndiResult hr{margin:10px 0;border:0;border-top:1px dashed #ccc}
-    .result.red{color:#dc3545}
-
-  </style>
-</head>
-
-<body>
-  <h1>EzySales Agent Tool</h1>
-
-  <!-- ----------  NAV TABS  ---------- -->
-  <div class="tabs">
-    <button class="tablink active" onclick="openTab(event,'about')">About</button>
-    <button class="tablink" onclick="openTab(event,'loan')">Home Loan</button>
-    <button class="tablink" onclick="openTab(event,'dsr')">DSR</button>
-    <button class="tablink" onclick="openTab(event,'ndi')">NDI</button>
-  </div>
-
-  <!-- ----------  ABOUT TAB  ---------- -->
-  <div id="about" class="tab-content active">
-    <div class="card">
-      <h2>About EzySales</h2>
-      <p>One‑page toolkit for Malaysian property agents: quick calculators for
-      loan repayment, DSR, and NDI. Streamline your consultation and close deals faster!</p>
-      <p style="margin-top:10px"><strong>Mission:</strong> Empower agents with transparent numbers.</p>
+<div id="ndi" class="tab-panel">
+  <div class="card">
+    <h2>🧾 NDI (Net Disposable Income) Checker</h2>
+    <div class="input-group">
+      <label>Monthly Gross Income (RM)</label>
+      <input type="number" id="ndiGross" value="5000">
     </div>
-  </div>
-
-  <!-- ----------  HOME‑LOAN TAB  ---------- -->
-  <div id="loan" class="tab-content">
-    <div class="card">
-      <h2>🏡 Home Loan Calculator</h2>
-      <label>Loan Amount (RM)</label>
-      <input type="number" id="loanAmount" value="500000" />
-
-      <label>Interest Rate (%)</label>
-      <input type="number" id="interestRate" value="4.25" step="0.01"/>
-
-      <label>Tenure (years)</label>
-      <input type="number" id="loanTenure" value="35"/>
-
-      <button class="calc" onclick="calcLoan()">Calculate</button>
-      <div id="loanResult" class="result"></div>
+    <div class="input-group">
+      <label>EPF Deduction (%)</label>
+      <input type="number" id="ndiEPF" value="12">
     </div>
-  </div>
-
-  <!-- ----------  DSR TAB  ---------- -->
-  <div id="dsr" class="tab-content">
-    <div class="card">
-      <h2>📊 DSR Calculator</h2>
-      <label>Gross Income (RM)</label>
-      <input type="number" id="dsrIncome" value="5000"/>
-
-      <label>Total Commitments (RM)</label>
-      <input type="number" id="dsrCommit" value="1000"/>
-
-      <label>DSR Limit (%)</label>
-      <input type="number" id="dsrLimit" value="65"/>
-
-      <button class="calc" onclick="calcDSR()">Check Eligibility</button>
-      <div id="dsrResult" class="result"></div>
+    <div class="input-group">
+      <label>SOCSO / Tax (RM)</label>
+      <input type="number" id="ndiTax" value="200">
     </div>
-  </div>
-
-  <!-- ----------  NDI TAB  ---------- -->
-  <div id="ndi" class="tab-content">
-    <div class="card">
-      <h2>💰 NDI (Net Disposable Income) Checker</h2>
-
-      <label>Monthly Gross Income (RM)</label>
-      <input type="number" id="ndiGross" value="5000"/>
-
-      <label>EPF Deduction (%)</label>
-      <input type="number" id="ndiEPF" value="12"/>
-
-      <label>SOCSO / Tax (RM)</label>
-      <input type="number" id="ndiTax" value="200"/>
-
-      <label>Total Loan Commitments (RM)</label>
-      <input type="number" id="ndiLoans" value="1500"/>
-
-      <label>Living Expenses (RM)</label>
-      <input type="number" id="ndiLive" value="200"/>
-
-      <button class="calc" onclick="calcNDI()">Calculate NDI</button>
-      <div id="ndiResult" class="result" hidden></div>
+    <div class="input-group">
+      <label>Total Loan Commitments (RM)</label>
+      <input type="number" id="ndiLoans" value="1500">
     </div>
+    <div class="input-group">
+      <label>Living Expenses (RM)</label>
+      <input type="number" id="ndiLiving" value="200">
+    </div>
+    <button onclick="calculateNDI()">Calculate NDI</button>
+    <div id="ndiResult" class="result-card" hidden></div>
   </div>
+</div>
 
-  <!-- ----------  JAVASCRIPT  ---------- -->
-  <script>
-    /* --- TAB HANDLER --- */
-    function openTab(evt,id){
-      document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-      document.querySelectorAll('.tablink').forEach(b=>b.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      evt.currentTarget.classList.add('active');
-    }
+// Replace or add this function in your <script> section
 
-    /* --- LOAN CALC --- */
-    function calcLoan(){
-      const P = +loanAmount.value||0;
-      const r = (+interestRate.value||0)/100/12;
-      const n = (+loanTenure.value||0)*12;
-      if(!P||!r||!n){loanResult.textContent='';return;}
-      const M = P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-      loanResult.textContent = 'Monthly Repayment: RM '+M.toFixed(2);
-    }
+function calculateNDI() {
+  const gross = parseFloat(document.getElementById('ndiGross').value);
+  const epfRate = parseFloat(document.getElementById('ndiEPF').value);
+  const tax = parseFloat(document.getElementById('ndiTax').value);
+  const loans = parseFloat(document.getElementById('ndiLoans').value);
+  const living = parseFloat(document.getElementById('ndiLiving').value);
 
-    /* --- DSR CALC --- */
-    function calcDSR(){
-      const inc = +dsrIncome.value||0;
-      const com = +dsrCommit.value||0;
-      const lim = (+dsrLimit.value||0)/100;
-      if(!inc){dsrResult.textContent='';return;}
-      const maxPay = inc*lim - com;
-      const estLoan = maxPay*200;
-      dsrResult.innerHTML =
-        `Max Monthly Installment:<br><span style=\"font-size:1.4rem\">RM ${maxPay.toFixed(2)}</span><br><br>`+
-        `Est. Loan:<br><span style=\"font-size:1.4rem\">RM ${estLoan.toFixed(2)}</span>`;
-    }
+  if (isNaN(gross) || isNaN(epfRate) || isNaN(tax) || isNaN(loans) || isNaN(living)) return;
 
-    /* --- NDI CALC WITH BREAKDOWN --- */
-    function calcNDI(){
-      const g = +ndiGross.value||0;
-      const epfPct = +ndiEPF.value||0;
-      const tax = +ndiTax.value||0;
-      const loans = +ndiLoans.value||0;
-      const live = +ndiLive.value||0;
-      if(!g){ndiResult.hidden=true;return;}
+  const epf = gross * (epfRate / 100);
+  const netIncome = gross - epf - tax - loans - living;
 
-      const epf = g*epfPct/100;
-      const ndi = g - epf - tax - loans - live;
+  let result = `
+    <h3>Breakdown</h3>
+    <p>Monthly Gross Income: RM ${gross.toFixed(2)}</p>
+    <p>- EPF (${epfRate}%): RM ${epf.toFixed(2)}</p>
+    <p>- SOCSO / Tax: RM ${tax.toFixed(2)}</p>
+    <p>- Loan Commitments: RM ${loans.toFixed(2)}</p>
+    <p>- Living Expenses: RM ${living.toFixed(2)}</p>
+    <hr>
+    <strong style="font-size:1.2rem; color:#28a745;">Net Disposable Income (NDI): RM ${netIncome.toFixed(2)}</strong>
+    <br><br>
+    ${netIncome > 1000 ? '<p style="color:green">✅ Your NDI is healthy for new loan applications.</p>' : '<p style="color:red">❌ Your NDI may be too low for most loans.</p>'}
+  `;
 
-      ndiResult.innerHTML =
-        `<div style=\"text-align:left\">\n`+
-        `Monthly Gross Income: RM ${g.toFixed(2)}<br>`+
-        `- EPF (${epfPct}%): RM ${epf.toFixed(2)}<br>`+
-        `- SOCSO / Tax: RM ${tax.toFixed(2)}<br>`+
-        `- Loan Commitments: RM ${loans.toFixed(2)}<br>`+
-        `- Living Expenses: RM ${live.toFixed(2)}<br><hr></div>`+
-        `<span style=\"font-size:1.2rem\">Net Disposable Income (NDI): RM ${ndi.toFixed(2)}</span><br><br>`+
-        (ndi>1000?'<span style=\"color:#198754\">✅ NDI is healthy</span>':'<span style=\"color:#dc3545\">❌ NDI may be too low</span>');
-      ndiResult.hidden=false;
-    }
-  </script>
-</body>
-</html>
+  const resultBox = document.getElementById('ndiResult');
+  resultBox.innerHTML = result;
+  resultBox.hidden = false;
+}
