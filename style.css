@@ -1,60 +1,69 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: url('bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-  margin: 0;
-  padding: 20px;
-  box-sizing: border-box;
+/* ---- Global / Background ---- */
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:url('bg.jpg') no-repeat center/cover fixed;
 }
 
-.wrapper {
-  display: flex;
-  max-width: 1000px;
-  margin: auto;
-  border-radius: 10px;
-  overflow: hidden;
-  backdrop-filter: blur(4px);
+/* ---- Layout ---- */
+.wrapper{
+  display:flex;
+  min-height:100vh;
+}
+.sidebar{
+  width:180px;
+  background:rgba(255,255,255,.9);
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+.content{
+  flex:1;
+  padding:40px 30px;
+}
+.content-box{
+  background:rgba(255,255,255,.95);  /* 95 % opaque */
+  padding:30px;
+  border-radius:14px;
+  max-width:600px;
+  margin:auto;
 }
 
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  gap: 10px;
-  min-width: 150px;
+/* ---- Tabs ---- */
+.tab-button{
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#fff;
+  font-weight:600;
+  text-align:left;
+  cursor:pointer;
 }
+.tab-button.active{
+  background:#1a73e8;
+  color:#fff;
+}
+.tab-content.hidden{display:none}
 
-.tab-button {
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  background: #ffffff;
-  color: #333;
-  cursor: pointer;
-  transition: background 0.3s;
+/* ---- Forms ---- */
+label{display:block;margin-top:15px;font-weight:600}
+input[type=number]{
+  width:100%;padding:10px;font-size:16px;
+  border:1px solid #ccc;border-radius:6px;margin-top:5px;
+  color:#000;background:#fff;
 }
+button{
+  width:100%;padding:12px;margin-top:20px;
+  background:#1a73e8;color:#fff;border:none;border-radius:8px;
+  font-size:16px;font-weight:700;cursor:pointer;
+}
+button:hover{background:#1865d0}
 
-.tab-button.active {
-  background-color: #1a73e8;
-  color: white;
+/* ---- Results ---- */
+.result{
+  margin-top:20px;padding:15px;background:#e8fff0;border-left:5px solid #28a745;
+  border-radius:8px;text-align:center;
 }
-
-.content {
-  flex: 1;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.95);
-  min-height: 600px;
-}
-
-.main-title {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #1a1a1a;
-}
-
-.tab-content.hidden {
-  display: none;
-}
+.result.hidden{display:none}
+.highlight{font-size:24px;font-weight:700;margin-top:10px}
