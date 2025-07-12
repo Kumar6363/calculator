@@ -47,21 +47,18 @@ body {
 }
 
 .title-box {
-  background: rgba(0, 0, 0, 0.5); /* Black with 70% transparency */
-  color: #fff;                    /* White text */
-  padding: 15px 30px;
+  background: rgba(0, 0, 0, 0.7);  /* Single transparent black box */
+  color: white;
+  padding: 16px 32px;
   border-radius: 12px;
   text-align: center;
   font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-weight: 600;
+  margin: 30px auto 20px;
   width: fit-content;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-
+  box-shadow: none;
 }
+
 
 .title-box span {
   background: linear-gradient(to right, #00d4ff, #ff00c8);
