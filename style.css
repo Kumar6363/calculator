@@ -47,7 +47,7 @@ body {
 }
 
 .title-box {
-  background: rgba(0, 0, 0, 0.95); /* ✅ Black with 70% transparency */
+  background: rgba(0, 0, 0, 0.5); /* ✅ Black with 70% transparency */
   padding: 15px 25px;
   border-radius: 10px;
   text-align: center;
