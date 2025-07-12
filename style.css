@@ -60,12 +60,6 @@ body {
 }
 
 
-.title-box span {
-  background: linear-gradient(to right, #00d4ff, #ff00c8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 
 .main-title {
   font-size: 28px;
