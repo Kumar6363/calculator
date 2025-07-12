@@ -4,62 +4,96 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EzySales Agent Tool</title>
+
+  <!-- external files -->
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
   <div class="wrapper">
-    <h1>EzySales Agent Tool</h1>
+    <h1 class="main-title">EzySales Agent Tool</h1>
+
+    <!-- TAB NAV -->
     <div class="tabs">
       <button class="tab-button active" onclick="showTab('about', event)">About</button>
-      <button class="tab-button" onclick="showTab('homeLoan', event)">Home Loan</button>
-      <button class="tab-button" onclick="showTab('dsr', event)">DSR</button>
-      <button class="tab-button" onclick="showTab('ndi', event)">NDI</button>
+      <button class="tab-button" onclick="showTab('home',  event)">Home Loan</button>
+      <button class="tab-button" onclick="showTab('dsr',   event)">DSR</button>
+      <button class="tab-button" onclick="showTab('ndi',   event)">NDI</button>
     </div>
 
-    <div id="about" class="tab-panel active">
-      <p><strong>Welcome to EzySales Tools</strong></p>
-      <p>Includes Home Loan, DSR, and NDI checkers in one single page. Designed for property agents.</p>
+    <!-- ABOUT -->
+    <div class="tab-content" id="about">
+      <h2>🏠 Welcome to EzySales Tools</h2>
+      <p>Quick calculators for Home Loan, DSR, and NDI — perfect for Malaysian
+         property agents. Select a tab above to begin.</p>
     </div>
 
-    <div id="homeLoan" class="tab-panel">
+    <!-- HOME‑LOAN -->
+    <div class="tab-content hidden" id="home">
       <h2>🏡 Home Loan Calculator</h2>
+
       <label>Loan Amount (RM)</label>
-      <input type="number" id="loanAmount" value="500000" />
+      <input type="number" id="loanAmount" value="500000">
+
       <label>Interest Rate (%)</label>
-      <input type="number" id="interestRate" step="0.01" value="4.25" />
+      <input type="number" id="interestRate" value="4.25" step="0.01">
+
       <label>Tenure (years)</label>
-      <input type="number" id="loanTenure" value="35" />
+      <input type="number" id="loanTenure" value="35">
+
       <button onclick="calculateLoan()">Calculate</button>
-      <div id="loanResult" class="result" style="display:none;"></div>
+
+      <div class="result-box" id="loanResult" style="display:none;">
+        <div id="monthlyPayment"></div>
+      </div>
     </div>
 
-    <div id="dsr" class="tab-panel">
+    <!-- DSR -->
+    <div class="tab-content hidden" id="dsr">
       <h2>📊 DSR Calculator</h2>
+
       <label>Gross Income (RM)</label>
-      <input type="number" id="dsrIncome" />
+      <input type="number" id="grossIncome">
+
       <label>Total Commitments (RM)</label>
-      <input type="number" id="dsrCommitment" />
+      <input type="number" id="commitments">
+
       <label>DSR Limit (%)</label>
-      <input type="number" id="dsrLimit" value="65" />
+      <input type="number" id="dsrLimit" value="65">
+
       <button onclick="calculateDSR()">Check Eligibility</button>
-      <div id="dsrResult" class="result" style="display:none;"></div>
+
+      <div class="result-box" id="dsrResult" style="display:none;">
+        <div id="maxInstallment"></div>
+        <div id="estLoan"></div>
+        <p id="dsrComment"></p>
+      </div>
     </div>
 
-    <div id="ndi" class="tab-panel">
+    <!-- NDI -->
+    <div class="tab-content hidden" id="ndi">
       <h2>🧾 NDI Checker</h2>
+
       <label>Gross Income (RM)</label>
-      <input type="number" id="ndiGross" />
+      <input type="number" id="ndiGross">
+
       <label>EPF Deduction (%)</label>
-      <input type="number" id="ndiEPF" value="11" />
+      <input type="number" id="epf" value="11">
+
       <label>SOCSO / Tax (RM)</label>
-      <input type="number" id="ndiTax" />
+      <input type="number" id="socso">
+
       <label>Loan Commitments (RM)</label>
-      <input type="number" id="ndiLoan" />
+      <input type="number" id="ndiLoan">
+
       <label>Living Expenses (RM)</label>
-      <input type="number" id="ndiLiving" />
+      <input type="number" id="living">
+
       <button onclick="calculateNDI()">Calculate NDI</button>
-      <div id="ndiResult" class="result" style="display:none;"></div>
+
+      <div class="result-box" id="ndiResult" style="display:none;">
+        <div id="ndiValue"></div>
+      </div>
     </div>
   </div>
 </body>
