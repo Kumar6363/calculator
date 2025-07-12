@@ -1,112 +1,40 @@
-/* Background with your image */
 body {
-  margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: url('bg.jpg') no-repeat center center fixed;
   background-size: cover;
-}
-
-/* Card wrapper */
-.wrapper {
-  max-width: 600px;
-  margin: 30px auto;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-/* Title */
-.main-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 28px;
-  color: #333;
-}
-
-/* Tabs */
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-.tab-button {
-  padding: 10px 20px;
-  background: #f0f0f0;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-}
-.tab-button.active {
-  background: #1a73e8;
-  color: #fff;
-}
-
-/* Content panels */
-.tab-content { display: block; }
-.tab-content.hidden { display: none; }
-
-label {
-  display: block;
-  margin-top: 15px;
-  font-weight: 600;
-}
-input[type="number"] {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-}
-button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  background: #1a73e8;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-button:hover { background: #1962c6; }
-
-/* Result box */
-.result-box {
-  margin-top: 20px;
-  padding: 15px;
-  background: #e8fff0;
-  border-left: 5px solid #28a745;
-  border-radius: 6px;
-  text-align: center;
-}
-.result-box .result-value { font-size: 24px; font-weight: 700; }
-
-input, button {
-  font-family: inherit;
-  font-size: 16px;
-  padding: 10px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  margin: 0;
+  padding: 20px;
   box-sizing: border-box;
-  color: #000; /* ✅ Ensure input text is black */
+}
+
+.wrapper {
+  display: flex;
+  max-width: 1000px;
+  margin: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  gap: 10px;
+  min-width: 150px;
 }
 
 .tab-button {
   padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
   border-radius: 6px;
-  margin: 5px;
-  background-color: white;
-  font-weight: bold;
-  color: black;
+  background: #ffffff;
+  color: #333;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 .tab-button.active {
@@ -114,17 +42,19 @@ input, button {
   color: white;
 }
 
-.hidden {
-  display: none;
+.content {
+  flex: 1;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  min-height: 600px;
 }
 
-.result-box {
-  margin-top: 20px;
-  padding: 15px;
-  background: #e6fff0;
-  border-left: 4px solid #28a745;
+.main-title {
   text-align: center;
-  font-weight: bold;
+  margin-bottom: 20px;
   color: #1a1a1a;
 }
 
+.tab-content.hidden {
+  display: none;
+}
