@@ -5,72 +5,165 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EzySales Agent Tool</title>
   <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .main {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 180px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .tab-button {
+      padding: 12px;
+      border: none;
+      background: white;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-button.active {
+      background: #1a73e8;
+      color: white;
+    }
+    .tab-button:hover {
+      background: #e0e0e0;
+    }
+    .content {
+      flex: 1;
+      padding: 40px;
+    }
+    .content-box {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .hidden {
+      display: none;
+    }
+    .tab-content h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 12px;
+      background: #1a73e8;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      margin-top: 15px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .result {
+      margin-top: 20px;
+      background: #e8fce8;
+      padding: 15px;
+      border-left: 4px solid #28a745;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .highlight {
+      font-size: 24px;
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div class="wrapper">
+  <div class="main">
     <div class="sidebar">
-      <button class="tab-button active" onclick="showTab('about', event)">ℹ️ About</button>
-      <button class="tab-button" onclick="showTab('homeLoan', event)">🏠 Home Loan</button>
+      <button class="tab-button" onclick="showTab('about', event)">ℹ️ About</button>
+      <button class="tab-button active" onclick="showTab('homeLoan', event)">🏠 Home Loan</button>
       <button class="tab-button" onclick="showTab('dsr', event)">📊 DSR</button>
       <button class="tab-button" onclick="showTab('ndi', event)">💰 NDI</button>
     </div>
-
     <div class="content">
-      <h1 class="main-title">EzySales Agent Tool</h1>
-
-      <div id="about" class="tab-content">
-        <h2>About EzySales Team</h2>
-        <p>Welcome to EzySales Agent Tools! Our team helps agents close deals faster with better property financing insights.</p>
-      </div>
-
-      <div id="homeLoan" class="tab-content hidden">
-        <h2>🏠 Home Loan Calculator</h2>
-        <label>Loan Amount (RM)</label>
-        <input type="number" id="loanAmount" value="500000" />
-        <label>Interest Rate (%)</label>
-        <input type="number" id="interestRate" value="4.25" />
-        <label>Tenure (years)</label>
-        <input type="number" id="loanTenure" value="35" />
-        <button onclick="calculateLoan()">Calculate</button>
-        <div id="loanResult" class="result-box" style="display:none"></div>
-      </div>
-
-      <div id="dsr" class="tab-content hidden">
-        <h2>📊 DSR Calculator</h2>
-        <label>Gross Income (RM)</label>
-        <input type="number" id="grossIncome" />
-        <label>Total Commitments (RM)</label>
-        <input type="number" id="commitments" />
-        <label>DSR Limit (%)</label>
-        <input type="number" id="dsrLimit" value="65" />
-        <button onclick="calculateDSR()">Check Eligibility</button>
-        <div id="dsrResult" class="result-box" style="display:none">
-          <div id="maxInstallment"></div>
-          <div id="estLoan"></div>
-          <div id="dsrComment"></div>
+      <h1 style="text-align:center">EzySales Agent Tool</h1>
+      <div class="content-box">
+        <div id="about" class="tab-content hidden">
+          <h2>ℹ️ About</h2>
+          <p>Welcome to EzySales Agent Tools — your one-stop hub for calculating loan eligibility, monthly repayments, and disposable income insights for property clients.</p>
         </div>
-      </div>
 
-      <div id="ndi" class="tab-content hidden">
-        <h2>💰 NDI Checker</h2>
-        <label>Gross Income (RM)</label>
-        <input type="number" id="ndiGross" />
-        <label>EPF Deduction (%)</label>
-        <input type="number" id="epf" value="11" />
-        <label>SOCSO / Tax (RM)</label>
-        <input type="number" id="socso" />
-        <label>Loan Commitments (RM)</label>
-        <input type="number" id="ndiLoan" />
-        <label>Living Expenses (RM)</label>
-        <input type="number" id="living" />
-        <button onclick="calculateNDI()">Calculate NDI</button>
-        <div id="ndiResult" class="result-box" style="display:none">
-          <div id="ndiValue"></div>
+        <div id="homeLoan" class="tab-content">
+          <h2>🏠 Home Loan Calculator</h2>
+          <label>Loan Amount (RM)</label>
+          <input type="number" id="loanAmount" value="500000" />
+          <label>Interest Rate (%)</label>
+          <input type="number" id="interestRate" value="4.25" />
+          <label>Tenure (years)</label>
+          <input type="number" id="loanTenure" value="35" />
+          <button onclick="calculateLoan()">Calculate</button>
+          <div id="loanResult" class="result" style="display:none"></div>
+        </div>
+
+        <div id="dsr" class="tab-content hidden">
+          <h2>📊 DSR Calculator</h2>
+          <label>Gross Income (RM)</label>
+          <input type="number" id="grossIncome" />
+          <label>Total Commitments (RM)</label>
+          <input type="number" id="commitments" />
+          <label>DSR Limit (%)</label>
+          <input type="number" id="dsrLimit" value="65" />
+          <button onclick="calculateDSR()">Check Eligibility</button>
+          <div id="dsrResult" class="result" style="display:none">
+            <div id="maxInstallment"></div>
+            <div id="estLoan"></div>
+            <div id="dsrComment"></div>
+          </div>
+        </div>
+
+        <div id="ndi" class="tab-content hidden">
+          <h2>💰 NDI Checker</h2>
+          <label>Gross Income (RM)</label>
+          <input type="number" id="ndiGross" />
+          <label>EPF Deduction (%)</label>
+          <input type="number" id="epf" value="11" />
+          <label>SOCSO / Tax (RM)</label>
+          <input type="number" id="socso" />
+          <label>Loan Commitments (RM)</label>
+          <input type="number" id="ndiLoan" />
+          <label>Living Expenses (RM)</label>
+          <input type="number" id="living" />
+          <button onclick="calculateNDI()">Calculate NDI</button>
+          <div id="ndiResult" class="result" style="display:none">
+            <div id="ndiValue"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
