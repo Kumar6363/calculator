@@ -4,74 +4,229 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EzySales Agent Tool</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .tab-button {
+      padding: 10px 20px;
+      border: 1px solid #ccc;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .tab-button.active {
+      background-color: #1a73e8;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .section input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #1a73e8;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .result {
+      margin-top: 15px;
+      padding: 12px;
+      background: #f0fff3;
+      border-left: 4px solid #28a745;
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .result .highlight {
+      font-size: 22px;
+      font-weight: bold;
+      display: block;
+    }
+
+    .note {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrapper">
     <h1>EzySales Agent Tool</h1>
     <div class="tabs">
-      <button class="tab-button active" onclick="openTab('about')">About</button>
-      <button class="tab-button" onclick="openTab('homeLoan')">Home Loan</button>
-      <button class="tab-button" onclick="openTab('dsr')">DSR</button>
-      <button class="tab-button" onclick="openTab('ndi')">NDI</button>
+      <button class="tab-button active" onclick="showTab('about')">About</button>
+      <button class="tab-button" onclick="showTab('home')">Home Loan</button>
+      <button class="tab-button" onclick="showTab('dsr')">DSR</button>
+      <button class="tab-button" onclick="showTab('ndi')">NDI</button>
     </div>
 
-    <!-- ABOUT TAB -->
-    <div class="tab-panel active" id="about">
-      <h2>Welcome to EzySales</h2>
-      <p>This tool is designed to help agents calculate:</p>
-      <ul>
-        <li>🏡 Home Loan Repayments</li>
-        <li>📊 DSR Eligibility</li>
-        <li>🧾 Net Disposable Income</li>
-      </ul>
-      <p>Let's close more deals together!</p>
+    <div id="about" class="tab-content active">
+      <p><strong>About EzySales Team:</strong></p>
+      <p>Motivation, branding, and promoting team members.</p>
     </div>
 
-    <!-- HOME LOAN TAB -->
-    <div class="tab-panel" id="homeLoan">
+    <div id="home" class="tab-content">
       <h2>🏡 Home Loan Calculator</h2>
-      <label>Loan Amount (RM)</label>
-      <input type="number" id="loanAmount" value="500000" />
-      <label>Interest Rate (%)</label>
-      <input type="number" id="interestRate" value="4.25" />
-      <label>Tenure (years)</label>
-      <input type="number" id="loanTenure" value="35" />
-      <button onclick="calculateLoan()">Calculate</button>
-      <div id="loanResult" class="result"></div>
+      <div class="section">
+        <label>Loan Amount (RM)</label>
+        <input type="number" id="loanAmount" value="500000" />
+        <label>Interest Rate (%)</label>
+        <input type="number" id="interestRate" step="0.01" value="4.25" />
+        <label>Tenure (years)</label>
+        <input type="number" id="loanTenure" value="35" />
+        <button onclick="calculateLoan()">Calculate</button>
+        <div id="loanResult" class="result" style="display:none;"></div>
+      </div>
     </div>
 
-    <!-- DSR TAB -->
-    <div class="tab-panel" id="dsr">
+    <div id="dsr" class="tab-content">
       <h2>📊 DSR Calculator</h2>
-      <label>Gross Income (RM)</label>
-      <input type="number" id="dsrIncome" value="5000" />
-      <label>Total Commitments (RM)</label>
-      <input type="number" id="dsrCommitment" value="1000" />
-      <label>DSR Limit (%)</label>
-      <input type="number" id="dsrLimit" value="65" />
-      <button onclick="calculateDSR()">Check Eligibility</button>
-      <div id="dsrResult" class="result"></div>
+      <div class="section">
+        <label>Gross Income (RM)</label>
+        <input type="number" id="grossIncome" />
+        <label>Total Commitments (RM)</label>
+        <input type="number" id="totalCommitments" />
+        <label>DSR Limit (%)</label>
+        <input type="number" id="dsrLimit" value="65" />
+        <button onclick="calculateDSR()">Check Eligibility</button>
+        <div id="dsrResult" class="result" style="display:none;"></div>
+      </div>
     </div>
 
-    <!-- NDI TAB -->
-    <div class="tab-panel" id="ndi">
-      <h2>🧾 NDI (Net Disposable Income) Checker</h2>
-      <label>Monthly Gross Income (RM)</label>
-      <input type="number" id="grossIncome" value="5000" />
-      <label>EPF Deduction (%)</label>
-      <input type="number" id="epf" value="11" />
-      <label>SOCSO / Tax (RM)</label>
-      <input type="number" id="tax" value="200" />
-      <label>Total Loan Commitments (RM)</label>
-      <input type="number" id="loanCommitments" value="1500" />
-      <label>Living Expenses (RM)</label>
-      <input type="number" id="livingExpenses" value="500" />
-      <button onclick="calculateNDI()">Calculate NDI</button>
-      <div id="ndiResult" class="result"></div>
+    <div id="ndi" class="tab-content">
+      <h2>📑 NDI (Net Disposable Income) Checker</h2>
+      <div class="section">
+        <label>Monthly Gross Income (RM)</label>
+        <input type="number" id="ndiGross" />
+        <label>EPF Deduction (%)</label>
+        <input type="number" id="ndiEPF" value="11" />
+        <label>SOCSO / Tax (RM)</label>
+        <input type="number" id="ndiSocso" />
+        <label>Total Loan Commitments (RM)</label>
+        <input type="number" id="ndiLoan" />
+        <label>Living Expenses (RM)</label>
+        <input type="number" id="ndiLiving" />
+        <button onclick="calculateNDI()">Calculate NDI</button>
+        <div id="ndiResult" class="result" style="display:none;"></div>
+      </div>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function calculateLoan() {
+      const loan = parseFloat(document.getElementById("loanAmount").value);
+      const rate = parseFloat(document.getElementById("interestRate").value) / 100 / 12;
+      const tenure = parseFloat(document.getElementById("loanTenure").value);
+      const months = tenure * 12;
+
+      const monthly = (loan * rate) / (1 - Math.pow(1 + rate, -months));
+      document.getElementById("loanResult").innerHTML = `
+        Monthly Repayment:<br><span class="highlight">RM ${monthly.toFixed(2)}</span>
+      `;
+      document.getElementById("loanResult").style.display = 'block';
+    }
+
+    function calculateDSR() {
+      const income = parseFloat(document.getElementById("grossIncome").value);
+      const commitments = parseFloat(document.getElementById("totalCommitments").value);
+      const limit = parseFloat(document.getElementById("dsrLimit").value) / 100;
+
+      const maxInstallment = (income * limit) - commitments;
+      const estLoan = maxInstallment > 0 ? maxInstallment * 200 : 0;
+      let message = maxInstallment >= 0 ? "👍 Good DSR Ratio! Eligible." : "⚠️ Poor DSR Ratio. Consider reducing commitments.";
+
+      document.getElementById("dsrResult").innerHTML = `
+        Max Monthly Installment:<br><span class="highlight">RM ${maxInstallment.toFixed(2)}</span><br>
+        Est. Loan:<br><span class="highlight">RM ${estLoan.toFixed(0)}</span><br><br>${message}
+      `;
+      document.getElementById("dsrResult").style.display = 'block';
+    }
+
+    function calculateNDI() {
+      const gross = parseFloat(document.getElementById("ndiGross").value);
+      const epf = parseFloat(document.getElementById("ndiEPF").value);
+      const socso = parseFloat(document.getElementById("ndiSocso").value);
+      const loan = parseFloat(document.getElementById("ndiLoan").value);
+      const living = parseFloat(document.getElementById("ndiLiving").value);
+
+      const epfAmount = gross * (epf / 100);
+      const ndi = gross - epfAmount - socso - loan - living;
+
+      document.getElementById("ndiResult").innerHTML = `
+        Net Disposable Income (NDI):<br><span class="highlight">RM ${ndi.toFixed(2)}</span>
+      `;
+      document.getElementById("ndiResult").style.display = 'block';
+    }
+  </script>
 </body>
 </html>
